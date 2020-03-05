@@ -49,7 +49,28 @@
 		                      </th>
 
 							<th><%= book.body %></th>
-						</tr>
+						<th class="inline-meta">
+						  <% if book.favorited_by?(current_user) %>
+								  <td>
+								    <%= link_to book_favorites_path(book), method: :delete do %>
+								      <i class="glyphicon glyphicon-heart" aria-hidden="true" style="color: black;"></i>
+								      <%= book.favorites.count %>
+								    <% end %>
+								  </td>
+								<% else %>
+								  <td>
+								    <%= link_to book_favorites_path(book), method: :book do %>
+								      <i class="glyphicon glyphicon-heart" aria-hidden="true"></i>
+								      <%= book.favorites.count %>
+								    <% end %>
+								  </td>
+								<% end %>
+
+						  <th>
+						    <%= link_to "#{book.book_comments.count} コメント", book_path(book.id) %>
+						  </th>
+						</th>
+					</tr>
 						<% end %>
 					</tbody>
 				</table>
