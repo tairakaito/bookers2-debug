@@ -13,6 +13,7 @@ class BooksController < ApplicationController
   	@books = Book.all #一覧表示するためにBookモデルの情報を全てくださいのall
     @book = Book.new
     @user = current_user
+    
     @book_favorites = Favorite.new
   end
 

@@ -4,15 +4,14 @@ class UsersController < ApplicationController
 
   def show
   	@user = User.find(params[:id])
-  	@books = @user.books
+  	@users = User.all
+    @books = @user.books
   	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
   end
 
   def index
-  	@users = User.new
     @users = User.all #一覧表示するためにUserモデルのデータを全て変数に入れて取り出す。
     @book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
-    @user = current_user
   end
   def edit
   	@user = User.find(params[:id])
@@ -30,6 +29,19 @@ class UsersController < ApplicationController
   	end
   end
 
+  def followed
+    @user = User.find(params[:id])
+    # @users = user.following_users
+    @users = @user.followed
+  end
+
+  def follower
+    @user = User.find(params[:id])
+    # @users = user.follower_users
+    @users = @user.follower
+  end
+
+
   private
   def user_params
   	params.require(:user).permit(:name, :introduction, :profile_image)
@@ -43,3 +55,5 @@ class UsersController < ApplicationController
    end
 
 end
+
+
